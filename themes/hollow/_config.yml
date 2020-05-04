@@ -1,0 +1,23 @@
+# Default post title
+default_post_title: Changeme
+
+#Date Format
+date_format: YYYY 年 MM 月 DD 日
+
+# Comment. 
+comments:
+  # Disqus comment
+  disqus_shortname: talei
+
+# Google Analytics Tracking ID
+google_analytics: 
+
+# Register service worker
+service_worker: false
+
+# Local search with atom.xml, dependency hexo-generator-feed plugin
+local_search: true
+
+# using viewer.js to view image
+# https://fengyuanchen.github.io/viewerjs/
+image_viewer: true
