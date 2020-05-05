@@ -111,9 +111,9 @@ feign:
 
 ## 参考资料
 
-- [Spring Cloud Eureka 服务实现不停机（Zero-downtime）部署](https://segmentfault.com/a/1190000022134014)
 - [微服务注册中心 Eureka 架构深入解读](https://www.infoq.cn/article/jlDJQ*3wtN2PcqTDyokh)
 - [Nacos 1.1.0发布，支持灰度配置和地址服务器模式](https://nacos.io/zh-cn/blog/nacos%201.1.0.html)
 - [Nacos Issues #2064](https://github.com/alibaba/nacos/issues/2064)
+- [Spring Cloud Eureka 服务实现不停机（Zero-downtime）部署](https://segmentfault.com/a/1190000022134014)
 - [Feign Configuration](~/.m2/repository/org/springframework/cloud/spring-cloud-openfeign-core/2.1.3.RELEASE/spring-cloud-openfeign-core-2.1.3.RELEASE.jar!/META-INF/spring-configuration-metadata.json)
 - [Hystrix Configuration](https://github.com/Netflix/Hystrix/wiki/Configuration)
