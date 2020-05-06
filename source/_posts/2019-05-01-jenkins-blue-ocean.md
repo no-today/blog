@@ -198,6 +198,14 @@ if [ ! -n "$ROLLBACK" ]; then
 fi
 ```
 
+## 完成效果
+
+![jrnkind-blue.png](http://cdn.talei.me/blog/2019/jenkins-blue-ocean/jrnkind-blue.png)
+
+![jenkins-input.png](http://cdn.talei.me/blog/2019/jenkins-blue-ocean/jenkins-input.png)
+
+![jenkins-publish-over-ssh.png](http://cdn.talei.me/blog/2019/jenkins-blue-ocean/jenkins-publish-over-ssh.png)
+
 ## Git 仓库过大的问题
 
 默认十分钟超时, 手动 clone 即可.
