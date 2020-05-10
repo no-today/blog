@@ -166,7 +166,7 @@ ROLLBACK=$4
 
 # Default Value
 DEFAULT_ENV="prod"
-DEFAULT_JVM_OPTIONS="-XX:MetaspaceSize=128m -XX:MaxMetaspaceSize=128m -Xms1024m -Xmx1024m -Xmn256m -Xss256k -XX:SurvivorRatio=8 -XX:+UseConcMarkSweepGC"
+DEFAULT_JVM_OPTIONS="-XX:MetaspaceSize=128m -XX:MaxMetaspaceSize=128m -Xms512m -Xmx512m -Xmn256m -Xss256k -XX:SurvivorRatio=8 -XX:+UseConcMarkSweepGC"
 STABLE='stable'
 
 if [ ! -n "$ENV" ]; then
@@ -189,7 +189,7 @@ if [ 0 -ne ${#PID} ]; then
 fi
 
 # run new
-nohup java -jar ${SERVER}.jar --spring.profiles.active=${ENV} > ${SERVER}.log 2>&1 &
+nohup java -jar ${SERVER}.jar --spring.profiles.active=${ENV} ${JVM_OPTIONS} > ${SERVER}.log 2>&1 &
 echo "start server ${SERVER}:${ENV} [${JVM_OPTIONS}]"
 
 # mark as latest
