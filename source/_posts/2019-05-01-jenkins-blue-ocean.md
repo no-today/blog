@@ -161,13 +161,9 @@ ENV=$2
 # JVM Options
 JVM_OPTIONS=$3
 
-# Rollback
-ROLLBACK=$4
-
 # Default Value
-DEFAULT_ENV="prod"
+DEFAULT_ENV="dev"
 DEFAULT_JVM_OPTIONS="-XX:MetaspaceSize=128m -XX:MaxMetaspaceSize=128m -Xms512m -Xmx512m -Xmn256m -Xss256k -XX:SurvivorRatio=8 -XX:+UseConcMarkSweepGC"
-STABLE='stable'
 
 if [ ! -n "$ENV" ]; then
   ENV=$DEFAULT_ENV
@@ -175,10 +171,6 @@ fi
 
 if [ ! -n "$JVM_OPTIONS" ]; then
   JVM_OPTIONS=$DEFAULT_JVM_OPTIONS
-fi
-
-if [ ! -n "$ROLLBACK" ]; then
-  SERVER=$STABLE
 fi
 
 # kill old
@@ -189,13 +181,8 @@ if [ 0 -ne ${#PID} ]; then
 fi
 
 # run new
-nohup java -jar ${SERVER}.jar --spring.profiles.active=${ENV} ${JVM_OPTIONS} > ${SERVER}.log 2>&1 &
+nohup java -jar ${SERVER}.jar ${JVM_OPTIONS} --spring.profiles.active=${ENV} > ${SERVER}.log 2>&1 &
 echo "start server ${SERVER}:${ENV} [${JVM_OPTIONS}]"
-
-# mark as latest
-if [ ! -n "$ROLLBACK" ]; then
-  cp ${SERVER}.jar ${STABLE}.jar
-fi
 ```
 
 ## 完成效果

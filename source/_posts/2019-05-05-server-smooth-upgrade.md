@@ -68,45 +68,57 @@ Eureka 和 Nacos 这些 Spring Cloud 系的注册中心都是用定时任务 htt
 
 ### Eureka
 
+**EurekaClientConfigBean**
+
 ```yaml
 eureka:
   client:
-    instance-info-replication-interval-seconds: 10  # 间隔多久更新实例信息到注册中心
-    registry-fetch-interval-seconds: 10             # 间隔多久去注册中心拉取注册信息(默认30秒)
+    instance-info-replication-interval-seconds: 5   # 每间隔5秒向注册中心更新自己的状态 (秒,30)
+    registry-fetch-interval-seconds: 5              # 每间隔5秒到注册中心获取一次注册信息 (秒,30)
   instance:
-    lease-renewal-interval-in-seconds: 5            # 向注册中心发生心跳的频率(默认30秒)
-    lease-expiration-duration-in-seconds: 10        # 注册中心在接收到上一个心跳之后等待的时间, 超过该时间会移除实例，流量不会转发过去了。
+    lease-renewal-interval-in-seconds: 5            # 该服务实例向注册中心发送心跳间隔 (秒,30)
+    lease-expiration-duration-in-seconds: 9         # 实例删除的超时时间,即服务端9秒收不到客户端心跳,会将客户端注册的实例删除 (秒,90)
 ```
 
 ### Nacos
+
+**NacosDiscoveryProperties**
 
 ```yaml
 spring:
   cloud:
     nacos:
       discovery:
+        watch—delay: 5000           # 每间隔5秒到注册中心获取一次注册信息 (毫秒, 3000)
         metadata:
           heart-beat-interval: 3    # 心跳包发送周期,单位为秒
           heart-beat-timeout: 6     # 心跳超时时间,即服务端6秒收不到心跳,会将客户端注册的实例设为不健康
           ip-delete-timeout: 9      # 实例删除的超时时间,即服务端9秒收不到客户端心跳,会将客户端注册的实例删除
 ```
 
-### 调整 Feign 重试机制
+### 调整 Ribbon 重试机制
 
 ```yaml
-feign:
-  hystrix:
+# 客户端负载均衡配置(不要试图改变key样式 ReadTimeout => read-timeout)
+ribbon:
+  eureka:
     enabled: true
-  client:
-    config:
-      default:
-        # 对当前实例的重试次数，放弃失败的节点，转而重试其他节点。
-        maxAutoRetries: 0
-        # 切换实例的重试次数
-        maxAutoRetriesNextServer: 3
-        okToRetryOnAllOperations: true
-        connectTimeout: 5000
-        readTimeout: 5000
+  ReadTimeout: 5000                         # 接口处理超时时间
+  ConnectTimeout: 5000                      # 连接超时时间
+  MaxAutoRetries: 0                         # 同实例最大自动重试次数
+  MaxAutoRetriesNextServer: 1               # 换实例重试次数
+  MaxTotalHttpConnections: 2000             # 最大http连接数 越大越好 但到到达一个临界点之后 就不会提高响应速度了
+  MaxConnectionsPerHost: 1000               # 每个host连接数
+
+# See https://github.com/Netflix/Hystrix/wiki/Configuration
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            # https://stackoverflow.com/questions/50622668/hystrix-ribbon-timeout-warnings
+            timeoutInMilliseconds: 20000    # 断路器的超时时间需要大于Ribbon的超时时间，不然不会触发重试。
 ```
 
 ## 参考资料
@@ -115,5 +127,5 @@ feign:
 - [Nacos 1.1.0发布，支持灰度配置和地址服务器模式](https://nacos.io/zh-cn/blog/nacos%201.1.0.html)
 - [Nacos Issues #2064](https://github.com/alibaba/nacos/issues/2064)
 - [Spring Cloud Eureka 服务实现不停机（Zero-downtime）部署](https://segmentfault.com/a/1190000022134014)
-- [Feign Configuration](~/.m2/repository/org/springframework/cloud/spring-cloud-openfeign-core/2.1.3.RELEASE/spring-cloud-openfeign-core-2.1.3.RELEASE.jar!/META-INF/spring-configuration-metadata.json)
 - [Hystrix Configuration](https://github.com/Netflix/Hystrix/wiki/Configuration)
+- [Ribbon](https://github.com/Netflix/ribbon/wiki/Getting-Started)
