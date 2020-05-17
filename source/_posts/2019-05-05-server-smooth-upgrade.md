@@ -89,7 +89,7 @@ spring:
   cloud:
     nacos:
       discovery:
-        watch—delay: 5000           # 每间隔5秒到注册中心获取一次注册信息 (毫秒, 3000)
+        watch—delay: 5000           # 每间隔5秒到注册中心获取一次注册信息 (毫秒, 30000)
         metadata:
           heart-beat-interval: 3    # 心跳包发送周期,单位为秒
           heart-beat-timeout: 6     # 心跳超时时间,即服务端6秒收不到心跳,会将客户端注册的实例设为不健康
