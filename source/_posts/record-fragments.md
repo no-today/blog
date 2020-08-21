@@ -37,4 +37,4 @@ categories:
 
 ## 2019
 
-![](//cdn.talei.me/blog/record-fragments/2019-12-16-8-42.jpeg)
+![](//cdn.talei.me/blog/record-fragments/2019-12-16-8-42.jpg)
