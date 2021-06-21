@@ -7,7 +7,7 @@ date_format: YYYY 年 MM 月 DD 日
 # Comment. 
 comments:
   # Disqus comment
-  disqus_shortname: talei
+  disqus_shortname: cathub
 
 # Google Analytics Tracking ID
 google_analytics: 

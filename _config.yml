@@ -15,14 +15,14 @@ timezone: 'Asia/Shanghai'
 avatar: ./images/avatar.png
 email: no.today@outlook.com
 github: https://github.com/no-today
-twitter: https://twitter.com/talei_me
+twitter: https://twitter.com/cathub_me
 
 # Logo setting
 logocolor: '#000'
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: http://blog.talei.me
+url: https://blog.cathub.me
 root: /
 permalink: :year/:month/:day/:title/
 permalink_defaults:
